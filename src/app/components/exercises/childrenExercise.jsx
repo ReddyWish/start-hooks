@@ -7,9 +7,7 @@ const ListOfComponents = ({ children }) => {
   return (
     <ul>
       {React.Children.map(children, (child, index) => (
-        <li>
-          {index + 1}. {child}
-        </li>
+        React.cloneElement(child, { ...child.props, num: index + 1 })
       ))}
     </ul>
   );
@@ -41,8 +39,10 @@ const ChildrenExercise = () => {
   );
 };
 
-const Component = () => {
-  return <div>Компонент списка</div>;
+const Component = ({ num }) => {
+  return <div>{num} Компонент списка </div>;
 };
-
+Component.propTypes = {
+  num: PropTypes.number
+};
 export default ChildrenExercise;
